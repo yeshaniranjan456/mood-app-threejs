@@ -9,7 +9,6 @@ const moodToImages = {
 const moodButtonsDiv = document.getElementById("mood-buttons");
 const artGalleryDiv = document.getElementById("art-gallery");
 
-// Create mood buttons
 Object.keys(moodToImages).forEach((mood) => {
   const btn = document.createElement("button");
   btn.innerText = mood;
@@ -17,7 +16,6 @@ Object.keys(moodToImages).forEach((mood) => {
   moodButtonsDiv.appendChild(btn);
 });
 
-// Display images for selected mood
 function showImagesForMood(mood) {
   artGalleryDiv.innerHTML = "";
   moodToImages[mood].forEach((imageFile) => {
