@@ -1,21 +1,31 @@
-fetch('mood_to_images.json')
-  .then(response => response.json())
-  .then(data => {
-    const moodButtons = document.getElementById('mood-buttons');
-    const gallery = document.getElementById('art-gallery');
+const moodToImages = {
+  happy: ["seed0000.png", "seed0003.png"],
+  sad: ["seed0001.png"],
+  calm: ["seed0002.png"],
+  anxious: ["seed0004.png"],
+  excited: ["seed0003.png"]
+};
 
-    Object.keys(data).forEach(mood => {
-      const button = document.createElement('button');
-      button.innerText = mood;
-      button.onclick = () => {
-        gallery.innerHTML = '';
-        data[mood].forEach(filename => {
-          const img = document.createElement('img');
-          img.src = `assets/${filename}`;
-          img.alt = `${mood} artwork`;
-          gallery.appendChild(img);
-        });
-      };
-      moodButtons.appendChild(button);
-    });
+const moodButtonsDiv = document.getElementById("mood-buttons");
+const artGalleryDiv = document.getElementById("art-gallery");
+
+// Create mood buttons
+Object.keys(moodToImages).forEach((mood) => {
+  const btn = document.createElement("button");
+  btn.innerText = mood;
+  btn.onclick = () => showImagesForMood(mood);
+  moodButtonsDiv.appendChild(btn);
+});
+
+// Display images for selected mood
+function showImagesForMood(mood) {
+  artGalleryDiv.innerHTML = "";
+  moodToImages[mood].forEach((imageFile) => {
+    const img = document.createElement("img");
+    img.src = `assets/${imageFile}`;
+    img.alt = mood;
+    img.style.width = "200px";
+    img.style.margin = "10px";
+    artGalleryDiv.appendChild(img);
   });
+}
